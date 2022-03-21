@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+
+<ul>
+  <!-- <li *ngFor="let pers of personas">
+    <a *ngIf="pers.edad >= 18" >{{ pers.nombre }}</a>
+    <ng-container *ngIf="pers.edad >= 18"> {{pers.nombre}} </ng-container>
+  </li> -->
+  <ng-container *ngFor="let pers of personas">
+    <li *ngIf="pers.edad >= 18">{{ pers.nombre }}</li>
+  </ng-container>
+</ul>
