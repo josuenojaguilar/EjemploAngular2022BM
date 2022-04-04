@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Producto } from 'src/app/models/productos.model';
 import { ProductosService } from 'src/app/services/productos.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-ejemplo',
   templateUrl: './ejemplo.component.html',
   styleUrls: ['./ejemplo.component.scss'],
-  providers: [ ProductosService ]
+  providers: [ ProductosService, UsuarioService ]
 })
 export class EjemploComponent implements OnInit {
   title = 'Ejemplo';
@@ -17,12 +18,19 @@ export class EjemploComponent implements OnInit {
     { nombre: 'Iker Sandoval', edad: 8 }
   ];
 
+  public token;
+
+
   //Productos
   public productoModelGet: Producto;
   public productoModelPost: Producto;
 
-  constructor(private _productoService: ProductosService) {
+  constructor(
+      private _productoService: ProductosService,
+      private _usuarioService: UsuarioService
+    ) {
     this.productoModelPost = new Producto('','',0,0,0);
+    this.token = this._usuarioService.obtenerToken()
   }
 
   ngOnInit(): void {
@@ -30,7 +38,7 @@ export class EjemploComponent implements OnInit {
   }
 
   getProductos(){
-    this._productoService.obtenerProductos().subscribe(
+    this._productoService.obtenerProductos(this.token).subscribe(
       (response) => {
         this.productoModelGet = response.productos;
         console.log(this.productoModelGet);
@@ -44,6 +52,19 @@ export class EjemploComponent implements OnInit {
 
   postProductos(){
     this._productoService.agregarProducto(this.productoModelPost).subscribe(
+      (response)=>{
+        console.log(response);
+        this.getProductos();
+      },
+      (error)=>{
+        console.log(<any>error);
+
+      }
+    )
+  }
+
+  deleteProductos(idProducto) {
+    this._productoService.eliminarProducto(idProducto).subscribe(
       (response)=>{
         console.log(response);
         this.getProductos();

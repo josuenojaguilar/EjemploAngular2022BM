@@ -13,14 +13,20 @@ export class ProductosService {
 
   constructor(public _http: HttpClient) { }
 
-  obtenerProductos(): Observable<any> {
+  obtenerProductos(token): Observable<any> {
+    let headersToken = this.headersVariable.set('Authorization', token)
 
-    return this._http.get(this.url + '/productos', { headers: this.headersVariable })
+    return this._http.get(this.url + '/productos', { headers: headersToken })
   }
 
   agregarProducto(modeloProducto: Producto): Observable<any> {
     let parametros = JSON.stringify(modeloProducto);
 
     return this._http.post(this.url + '/agregarProductos', parametros, {headers: this.headersVariable})
+  }
+
+  eliminarProducto(id : String): Observable<any> {
+
+    return this._http.delete(this.url + '/eliminarProducto/' + id, { headers: this.headersVariable })
   }
 }

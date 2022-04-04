@@ -28,10 +28,13 @@
           <p class="card-text">
             La cantidad existen es: {{ prod.cantidad }} y su precio es de: {{ prod.precio }}
           </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+
         </div>
         <div class="card-footer text-muted">
-          2 days ago
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-danger" (click)="deleteProductos(prod._id)">Eliminar</button>
+            <button type="button" class="btn btn-warning">Editar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -69,7 +72,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="postProductos()">Agregar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos()">Agregar</button>
       </div>
     </div>
   </div>
