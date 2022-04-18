@@ -24,12 +24,14 @@ export class EjemploComponent implements OnInit {
   //Productos
   public productoModelGet: Producto;
   public productoModelPost: Producto;
+  public productoModelGetId: Producto;
 
   constructor(
       private _productoService: ProductosService,
       private _usuarioService: UsuarioService
     ) {
     this.productoModelPost = new Producto('','',0,0,0);
+    this.productoModelGetId = new Producto('','',0,0,0);
     this.token = this._usuarioService.obtenerToken()
   }
 
@@ -50,14 +52,38 @@ export class EjemploComponent implements OnInit {
     )
   }
 
+  getProductoId(idProducto){
+    this._productoService.obtenerProductoId(idProducto).subscribe(
+      (response)=>{
+        console.log(response);
+        this.productoModelGetId = response.producto;
+      },
+      (error)=>{
+
+      }
+    )
+  }
+
   postProductos(){
-    this._productoService.agregarProducto(this.productoModelPost).subscribe(
+    this._productoService.agregarProducto(this.productoModelPost, this._usuarioService.obtenerToken()).subscribe(
       (response)=>{
         console.log(response);
         this.getProductos();
       },
       (error)=>{
         console.log(<any>error);
+
+      }
+    )
+  }
+
+  putProducto(){
+    this._productoService.editarProducto(this.productoModelGetId).subscribe(
+      (response)=>{
+        console.log(response);
+        this.getProductos();
+      },
+      (error)=>{
 
       }
     )

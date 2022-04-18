@@ -51,14 +51,30 @@ export class LoginComponent implements OnInit {
     )
   }
 
+  getTokenPromesa(): Promise<any> {
+    return new Promise((resolve, reject)=>{
+      this._usuarioService.login(this.usuarioModel, "true").subscribe(
+        (response)=>{
+          // console.log(response);
+          localStorage.setItem("token", response.token)
+          resolve(response);
+        },
+        (error)=>{
+          console.log(<any>error);
+
+        }
+      )
+    })
+  }
+
   login(){
     this._usuarioService.login(this.usuarioModel).subscribe(
       (response)=>{
-        this.getToken();
-        localStorage.setItem("identidad", JSON.stringify(response.usuario))
-        console.log(response);
+        this.getTokenPromesa().then(respuesta=>{
+          localStorage.setItem("identidad", JSON.stringify(response.usuario))
 
-        this._router.navigate(['/ejemplo']);
+          this._router.navigate(['/ejemplo']);
+        })
       },
       (error)=>{
         console.log(<any>error);

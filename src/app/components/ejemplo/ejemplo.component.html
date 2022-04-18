@@ -1,11 +1,11 @@
 <!-- <h1>{{ title }}</h1> -->
 
 <!-- <ul> -->
-  <!-- <li *ngFor="let pers of personas">
+<!-- <li *ngFor="let pers of personas">
     <a *ngIf="pers.edad >= 18" >{{ pers.nombre }}</a>
     <ng-container *ngIf="pers.edad >= 18"> {{pers.nombre}} </ng-container>
   </li> -->
-  <!-- <ng-container *ngFor="let pers of personas">
+<!-- <ng-container *ngFor="let pers of personas">
     <li *ngIf="pers.edad >= 18">{{ pers.nombre }}</li>
   </ng-container>
 </ul> -->
@@ -33,7 +33,11 @@
         <div class="card-footer text-muted">
           <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-danger" (click)="deleteProductos(prod._id)">Eliminar</button>
-            <button type="button" class="btn btn-warning">Editar</button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample" (click)="getProductoId(prod._id)">
+              Editar
+            </button>
+            <button type="button" class="btn btn-success" [routerLink]="['/verProducto', prod._id]">Ver</button>
           </div>
         </div>
       </div>
@@ -56,17 +60,17 @@
           <div class="mb-3">
             <label for="inputNombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
-            [(ngModel)]="productoModelPost.nombre">
+              [(ngModel)]="productoModelPost.nombre">
           </div>
           <div class="mb-3">
             <label for="inputCantidad" class="form-label">Cantidad</label>
             <input type="text" class="form-control" id="inputCantidad" name="cantidad" #cantidad="ngModel"
-            [(ngModel)]="productoModelPost.cantidad">
+              [(ngModel)]="productoModelPost.cantidad">
           </div>
           <div class="mb-3">
             <label for="inputPrecio" class="form-label">Precio</label>
             <input type="text" class="form-control" id="inputPrecio" name="precio" #precio="ngModel"
-            [(ngModel)]="productoModelPost.precio">
+              [(ngModel)]="productoModelPost.precio">
           </div>
         </form>
       </div>
@@ -78,3 +82,36 @@
   </div>
 </div>
 
+
+<!-- OffCanvas Editar Producto -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Producto</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombre" class="form-label">Nombre Producto</label>
+        <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
+        [(ngModel)]="productoModelGetId.nombre">
+      </div>
+      <div class="mb-3">
+        <label for="inputCantidad" class="form-label">Cantidad Producto</label>
+        <input type="number" class="form-control" id="inputCantidad" name="cantidad" #cantidad="ngModel"
+        [(ngModel)]="productoModelGetId.cantidad">
+      </div>
+      <div class="mb-3">
+        <label for="inputVendido" class="form-label">Vendido Producto</label>
+        <input type="text" class="form-control" id="inputVendido" name="vendido" #vendido="ngModel"
+        [(ngModel)]="productoModelGetId.vendido">
+      </div>
+      <div class="mb-3">
+        <label for="inputPrecio" class="form-label">Precio Producto</label>
+        <input type="text" class="form-control" id="inputPrecio" name="precio" #precio="ngModel"
+        [(ngModel)]="productoModelGetId.precio">
+      </div>
+      <button class="btn btn-success" (click)="putProducto()" data-bs-dismiss="offcanvas">Editar Producto</button>
+    </form>
+  </div>
+</div>
