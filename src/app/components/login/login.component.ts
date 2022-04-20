@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
         this.getTokenPromesa().then(respuesta=>{
           localStorage.setItem("identidad", JSON.stringify(response.usuario))
 
-          this._router.navigate(['/ejemplo']);
+          this._router.navigate(['/usuario/ejemplo']);
         })
       },
       (error)=>{

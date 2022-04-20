@@ -28,7 +28,7 @@ export class EjemploComponent implements OnInit {
 
   constructor(
       private _productoService: ProductosService,
-      private _usuarioService: UsuarioService
+      public _usuarioService: UsuarioService
     ) {
     this.productoModelPost = new Producto('','',0,0,0);
     this.productoModelGetId = new Producto('','',0,0,0);

@@ -31,7 +31,9 @@
 
         </div>
         <div class="card-footer text-muted">
-          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button class="btn btn-primary" *ngIf="_usuarioService.obtenerIdentidad().rol === 'USUARIO'">Agregar a Carrito</button>
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example"
+          *ngIf="_usuarioService.obtenerIdentidad().rol === 'ADMIN'">
             <button type="button" class="btn btn-danger" (click)="deleteProductos(prod._id)">Eliminar</button>
             <button type="button" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
               aria-controls="offcanvasExample" (click)="getProductoId(prod._id)">
