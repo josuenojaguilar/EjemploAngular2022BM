@@ -9,29 +9,28 @@ import { ProductosService } from 'src/app/services/productos.service';
   providers: [ProductosService]
 })
 export class VerProductoComponent implements OnInit {
+  product;
+  load: boolean = false;
 
   constructor(
     public _activatedRoute: ActivatedRoute,
     public _productosService: ProductosService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { //ciclo de vida del componente
     this._activatedRoute.paramMap.subscribe((dataRuta)=>{
-      console.log(dataRuta.get('idProducto'));
       this.getProductoId(dataRuta.get('idProducto'));
     })
   }
 
   getProductoId(idProducto){
-    this._productosService.obtenerProductoId(idProducto).subscribe(
-      (response)=>{
-        console.log(response);
-
+    this._productosService.obtenerProductoId(idProducto).subscribe({
+      next: (response)=>{
+        this.product = response.producto;
+        this.load = true;
       },
-      (error)=>{
-
-      }
-    )
+      error: (err)=> alert(err.error.mensaje)
+    })
   }
 
 }

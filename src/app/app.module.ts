@@ -13,6 +13,7 @@ import { VerProductoComponent } from './components/ver-producto/ver-producto.com
 import { ChartsModule } from '@rinminase/ng-charts';
 import { GraficasComponent } from './components/graficas/graficas.component';
 import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuario.component';
+import { ActualizarUsuarioComponent } from './components/actualizar-usuario/actualizar-usuario.component';
 
 
 
@@ -25,7 +26,8 @@ import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuar
     EjemploComponent,
     VerProductoComponent,
     GraficasComponent,
-    InicioUsuarioComponent
+    InicioUsuarioComponent,
+    ActualizarUsuarioComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { VerProductoComponent } from './components/ver-producto/ver-producto.com
 import { GraficasComponent } from './components/graficas/graficas.component';
 import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuario.component';
 import { UsuarioGuard } from './services/usuario.guard';
+import { ActualizarUsuarioComponent } from './components/actualizar-usuario/actualizar-usuario.component';
 // usuario/ejemplo
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: 'graficas', component: GraficasComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'ejemplo', component: EjemploComponent },
-  { path: 'usuario',  component: InicioUsuarioComponent, canActivate: [UsuarioGuard]  ,children: [
+  { path: 'usuario',  component: InicioUsuarioComponent, children: [
     { path: 'ejemplo', component: EjemploComponent },
+    { path: 'actualizarUsuario', component: ActualizarUsuarioComponent},
     { path: 'verProducto/:idProducto', component: VerProductoComponent },
     { path: 'graficas', component: GraficasComponent }
   ]},
