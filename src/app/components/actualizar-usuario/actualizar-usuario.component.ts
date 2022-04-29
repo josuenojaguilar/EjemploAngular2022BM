@@ -7,7 +7,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./actualizar-usuario.component.scss']
 })
 export class ActualizarUsuarioComponent implements OnInit {
-  user;
+  user; 
   name;
   email;
 
