@@ -10,15 +10,25 @@
   </ng-container>
 </ul> -->
 
+<div class="input-group m-4">
+  <input [(ngModel)]="search" type="text" class="form-control" placeholder="Search product's" aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary me-5" type="button" id="button-addon2">Search</button>
+</div>
 
-<div class="container">
+<div class="text-center">
   <!-- Button Abrir Modal Agregar Producto -->
   <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
     Agregar Producto
   </button>
+</div>
+
+<hr>
+<br>
+
+<div class="container">
 
   <div class="row">
-    <div class="col-12 col-md-4" *ngFor="let prod of productoModelGet">
+    <div class="col-12 col-md-4" *ngFor="let prod of productoModelGet | search:search">
       <div class="card text-center mb-3">
         <div class="card-header">
           {{ prod._id }}
@@ -58,7 +68,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form #addProductForm="ngForm">
           <div class="mb-3">
             <label for="inputNombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
@@ -66,19 +76,19 @@
           </div>
           <div class="mb-3">
             <label for="inputCantidad" class="form-label">Cantidad</label>
-            <input type="text" class="form-control" id="inputCantidad" name="cantidad" #cantidad="ngModel"
+            <input type="number" class="form-control" id="inputCantidad" name="cantidad" #cantidad="ngModel"
               [(ngModel)]="productoModelPost.cantidad">
           </div>
           <div class="mb-3">
             <label for="inputPrecio" class="form-label">Precio</label>
-            <input type="text" class="form-control" id="inputPrecio" name="precio" #precio="ngModel"
+            <input type="number" class="form-control" id="inputPrecio" name="precio" #precio="ngModel"
               [(ngModel)]="productoModelPost.precio">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos()">Agregar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos(addProductForm)">Agregar</button>
       </div>
     </div>
   </div>

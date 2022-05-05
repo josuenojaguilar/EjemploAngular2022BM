@@ -14,6 +14,7 @@ import { ChartsModule } from '@rinminase/ng-charts';
 import { GraficasComponent } from './components/graficas/graficas.component';
 import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuario.component';
 import { ActualizarUsuarioComponent } from './components/actualizar-usuario/actualizar-usuario.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 
@@ -27,7 +28,8 @@ import { ActualizarUsuarioComponent } from './components/actualizar-usuario/actu
     VerProductoComponent,
     GraficasComponent,
     InicioUsuarioComponent,
-    ActualizarUsuarioComponent
+    ActualizarUsuarioComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

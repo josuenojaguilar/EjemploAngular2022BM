@@ -19,6 +19,7 @@ export class EjemploComponent implements OnInit {
   ];
 
   public token;
+  public search;
 
 
   //Productos
@@ -64,11 +65,13 @@ export class EjemploComponent implements OnInit {
     )
   }
 
-  postProductos(){
+  postProductos(addProductForm){
     this._productoService.agregarProducto(this.productoModelPost, this._usuarioService.obtenerToken()).subscribe(
       (response)=>{
         console.log(response);
         this.getProductos();
+        //solo un input -> this.productoModelPost.nombre = '';
+        addProductForm.reset();
       },
       (error)=>{
         console.log(<any>error);
